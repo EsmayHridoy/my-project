@@ -17,6 +17,9 @@ public class MessageEntity extends BaseEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
+    public MessageEntity() {
+    }
+
     public MessageEntity(String messageSubject, String messageBody, User user) {
         this.messageSubject = messageSubject;
         this.messageBody = messageBody;

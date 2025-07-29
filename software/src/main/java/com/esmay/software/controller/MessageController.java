@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class MessageController {
     @Autowired
@@ -18,7 +20,7 @@ public class MessageController {
 
     @GetMapping("/received")
     public ResponseEntity<?> receivedMessage() {
-        MessageEntity last = messageService.getLastReceived();
+        List<MessageEntity> last = messageService.allMessage();
         if (last == null) {
             return ResponseEntity.ok("No message received yet.");
         }

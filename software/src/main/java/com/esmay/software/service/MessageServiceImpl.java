@@ -1,23 +1,32 @@
 package com.esmay.software.service;
 
 import com.esmay.software.model.MessageEntity;
+import com.esmay.software.repository.MessageRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.List;
 
 
 @Service
 public class MessageServiceImpl implements MessageService{
-    private MessageEntity lastMessage;
+    private MessageRepository messageRepository;
+
+
+    public MessageServiceImpl(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 
     @Override
     @RabbitListener(queues = {"hr"})
     public void handleReceived(MessageEntity message) {
         System.out.println("Received: " + message);
-        this.lastMessage = message;
+        //if(message != null)messageRepository.save(message);
     }
 
-    @Override
-    public MessageEntity getLastReceived() {
-        return lastMessage;
+    public List<MessageEntity> allMessage(){
+        return messageRepository.findAll();
     }
+
 }

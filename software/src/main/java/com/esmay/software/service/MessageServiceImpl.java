@@ -10,7 +10,7 @@ public class MessageServiceImpl implements MessageService{
     private MessageEntity lastMessage;
 
     @Override
-    @RabbitListener(queues = "hr")
+    @RabbitListener(queues = {"hr"})
     public void handleReceived(MessageEntity message) {
         System.out.println("Received: " + message);
         this.lastMessage = message;

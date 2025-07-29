@@ -46,4 +46,13 @@ public class MessageEntity extends BaseEntity{
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "MessageEntity{" +
+                "messageSubject='" + messageSubject + '\'' +
+                ", messageBody='" + messageBody + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

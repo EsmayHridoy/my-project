@@ -21,8 +21,9 @@ public class MessageServiceImpl implements MessageService{
     @Override
     @RabbitListener(queues = {"hr"})
     public void handleReceived(MessageEntity message) {
+        message.setId(null);
         System.out.println("Received: " + message);
-        //if(message != null)messageRepository.save(message);
+        messageRepository.save(message);
     }
 
     public List<MessageEntity> allMessage(){

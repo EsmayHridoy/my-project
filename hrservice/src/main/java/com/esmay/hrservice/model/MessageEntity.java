@@ -3,6 +3,8 @@ package com.esmay.hrservice.model;
 
 import jakarta.persistence.*;
 
+
+
 @Entity
 @Table(name = "message")
 public class MessageEntity extends BaseEntity{
@@ -10,26 +12,17 @@ public class MessageEntity extends BaseEntity{
     @Column(name = "subject")
     private String messageSubject;
 
-    @Override
-    public String toString() {
-        return "MessageEntity{" +
-                "messageSubject='" + messageSubject + '\'' +
-                ", messageBody='" + messageBody + '\'' +
-                ", user=" + user +
-                '}';
-    }
 
     @Column(name = "message")
     private String messageBody;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "Sent")
+    private String fromBody;
 
-    public MessageEntity(String messageSubject, String messageBody, User user) {
+    public MessageEntity(String messageSubject, String messageBody, String fromBody) {
         this.messageSubject = messageSubject;
         this.messageBody = messageBody;
-        this.user = user;
+        this.fromBody = fromBody;
     }
 
     public String getMessageSubject() {
@@ -48,11 +41,20 @@ public class MessageEntity extends BaseEntity{
         this.messageBody = messageBody;
     }
 
-    public User getUser() {
-        return user;
+    public String getFromBody() {
+        return fromBody;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setFromBody(String fromBody) {
+        this.fromBody = fromBody;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageEntity{" +
+                "messageSubject='" + messageSubject + '\'' +
+                ", messageBody='" + messageBody + '\'' +
+                ", fromBody='" + fromBody + '\'' +
+                '}';
     }
 }
